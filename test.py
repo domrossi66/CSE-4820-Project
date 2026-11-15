@@ -328,6 +328,57 @@ for cluster in sorted(
 )
 
 
+plt.figure(figsize=(10, 7))
+
+for cluster in sorted(player_stats["KMeans_Cluster"].unique()):
+
+    subset = player_stats[
+        player_stats["KMeans_Cluster"] == cluster
+    ]
+
+    plt.scatter(
+        subset["PCA1"],
+        subset["PCA2"],
+        label=f"Cluster {cluster}",
+        s=50
+    )
+
+plt.title("NBA Player Archetypes - K-Means")
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+
+plt.legend(title="Cluster")
+plt.grid(True)
+plt.show()
+
+
+plt.figure(figsize=(10, 7))
+
+for cluster in sorted(
+    player_stats["Hierarchical_Cluster"].unique()
+):
+
+    subset = player_stats[
+        player_stats["Hierarchical_Cluster"] == cluster
+    ]
+
+    plt.scatter(
+        subset["PCA1"],
+        subset["PCA2"],
+        label=f"Cluster {cluster}",
+        s=50
+    )
+
+plt.title("NBA Player Archetypes - Hierarchical Clustering")
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+
+plt.legend(title="Cluster")
+plt.grid(True)
+plt.show()
+
+
+
 player_stats.to_csv(
     "nba_player_clusters.csv",
     index=False
